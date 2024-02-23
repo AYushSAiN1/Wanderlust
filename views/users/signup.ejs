@@ -15,9 +15,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" class="form-control" minlength="6" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="bi bi-eye-slash"></i>
+                        </button>
+                        <div class="invalid-feedback">Enter atleast 6 letters</div>
+                    </div>
+                    <div id="passwordStrength" class="form-text"></div>
                 </div>
+                
                 <button class="btn btn-success">SignUp</button>
             </form>
         </div>
     </div>
+
+    <script src="/js/signup.js"></script>
