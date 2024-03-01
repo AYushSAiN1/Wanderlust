@@ -11,26 +11,25 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/expressErrors.js");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const dbURL = process.env.ATLAS_URL
+const dbURL = process.env.ATLAS_URL;
 
 const store = MongoStore.create({
   mongoUrl: dbURL,
   crypto: {
     secret: process.env.SECRET,
   },
-  touchAfter: 24 * 3600, 
-})
+  touchAfter: 24 * 3600,
+});
 
 store.on("error", () => {
   console.log("ERROR in MongoSession", err);
-})
-
+});
 
 const sessionOptions = {
   store,
@@ -43,7 +42,6 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
-
 
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
@@ -58,9 +56,6 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-
-
-
 //Connecting to DB(MongoDB)
 main()
   .then(() => {
@@ -72,7 +67,6 @@ main()
 async function main() {
   await mongoose.connect(dbURL);
 }
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -109,3 +103,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log("Server running on port 8080");
 });
+
+hello;
